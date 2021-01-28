@@ -1,5 +1,7 @@
 # Do your shit 💩
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/5b028116-a00c-4c5a-9a66-3d0327f9ea4b/deploy-status)](https://app.netlify.com/sites/do-your-shit/deploys)
+
 This is a terrible todo-app that should not be used by anyone.
 A live demo is available [here](https://do-your-shit.netlify.app/).
 
