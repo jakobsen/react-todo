@@ -12,8 +12,4 @@ const App = () => {
   );
 };
 
-const Heading = styled.h1`
-  color: red;
-`;
-
 export default App;
