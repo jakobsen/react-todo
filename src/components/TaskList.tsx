@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled, { css } from "styled-components";
 import { ITask } from "@components/TasksWrapper";
 import completeBox from "@public/complete.svg";
@@ -11,6 +11,12 @@ interface Props {
 }
 
 const TaskList = ({ tasks, toggle }: Props) => {
+  useEffect(() => {
+    // This loads the SVG files into the browser, so the first
+    // task created won't flicker
+    new Image().src = completeBox;
+    new Image().src = incompleteBox;
+  }, []);
   return (
     <ul>
       {tasks.map((task) => (
