@@ -1,23 +1,21 @@
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, useState, useEffect } from "react";
 import styled from "styled-components";
 import Spacer from "@components/Spacer";
+import TaskList from "@components/TaskList";
 
-interface Task {
+export interface ITask {
   text: string;
   readonly id: number;
+  complete: boolean;
 }
 
-interface IncompleteTask extends Task {
+interface IncompleteTask extends ITask {
   complete: false;
-}
-
-interface CompleteTask extends Task {
-  complete: true;
 }
 
 const TasksWrapper = () => {
   const [newTaskText, setNewTaskText] = useState("");
-  const [incompleteTasks, setIncompleteTasks] = useState<IncompleteTask[]>([]);
+  const [tasks, setTasks] = useState<ITask[]>([]);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -27,10 +25,20 @@ const TasksWrapper = () => {
         id: new Date().getTime(),
         complete: false,
       };
-      setIncompleteTasks([newTask, ...incompleteTasks]);
+      setTasks([...tasks, newTask]);
       setNewTaskText("");
     }
   };
+
+  function toggleTask(id: number) {
+    const tempTasks = [...tasks];
+    tempTasks.forEach((task) => {
+      if (task.id == id) {
+        task.complete = !task.complete;
+      }
+    });
+    setTasks(tempTasks);
+  }
 
   return (
     <>
@@ -44,6 +52,24 @@ const TasksWrapper = () => {
           <SubmitButton type="submit" value="Fuck me" />
         </TaskForm>
       </WideWrapper>
+      <Spacer axis="vertical" size={50} />
+      <Wrapper>
+        <ConstantHeight>
+          <h2>Shit you still have to do</h2>
+          <Spacer size={8} />
+          <TaskList
+            tasks={tasks.filter((task) => !task.complete)}
+            toggle={toggleTask}
+          />
+        </ConstantHeight>
+        <Spacer axis="vertical" size={24} />
+        <h2>Shit you're done with</h2>
+        <Spacer size={8} />
+        <TaskList
+          tasks={tasks.filter((task) => task.complete)}
+          toggle={toggleTask}
+        />
+      </Wrapper>
     </>
   );
 };
@@ -56,6 +82,11 @@ const WideWrapper = styled.section`
 const Wrapper = styled.section`
   max-width: 85vw;
   margin: 0 auto;
+`;
+
+const ConstantHeight = styled.div`
+  min-height: 150px;
+  height: 30vh;
 `;
 
 const TaskForm = styled.form`
