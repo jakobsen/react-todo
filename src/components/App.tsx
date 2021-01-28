@@ -10,10 +10,17 @@ const App = () => {
     <>
       <CSSReset />
       <GlobalStyles />
-      <Header>Get Your Shit Done</Header>
-      <TasksWrapper />
+      <SiteWrapper>
+        <Header>Get Your Shit Done</Header>
+        <TasksWrapper />
+      </SiteWrapper>
     </>
   );
 };
+
+const SiteWrapper = styled.main`
+  max-width: 800px;
+  margin: 0 auto;
+`;
 
 export default App;

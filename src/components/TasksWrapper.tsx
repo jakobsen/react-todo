@@ -75,7 +75,8 @@ const TasksWrapper = () => {
 };
 
 const WideWrapper = styled.section`
-  max-width: 90vw;
+  width: 90vw;
+  max-width: 600px;
   margin: 0 auto;
 `;
 
