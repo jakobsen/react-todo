@@ -9,6 +9,7 @@ module.exports = {
   },
   alias: {
     "@components": "./src/components",
+    "@public": "./public/",
   },
   optimize: {
     bundle: true,
