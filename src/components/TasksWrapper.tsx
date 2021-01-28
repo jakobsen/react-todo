@@ -95,13 +95,27 @@ const TaskForm = styled.form`
   height: 50px;
   grid-template-columns: 3fr 1fr;
   column-gap: 12px;
+  row-gap: 8px;
+  width: 100%;
+  max-width: 100%;
+  justify-content: center;
+
+  @media (max-width: 400px) {
+    grid-template-columns: 1fr;
+    height: 112px;
+  }
 `;
 
 const TaskInput = styled.input`
   border: none;
-  border-bottom: 2px solid var(--color-primary, red);
+  border-bottom: 2px solid var(--color-primary);
   padding-left: 23px;
   font-size: inherit;
+
+  @media (max-width: 400px) {
+    text-align: center;
+    padding: 0;
+  }
 `;
 
 const SubmitButton = styled.input`
@@ -109,6 +123,9 @@ const SubmitButton = styled.input`
   background-color: var(--color-primary);
   color: #fff;
   font-size: inherit;
+  max-width: 140px;
+  margin: 0 auto;
+  height: 50px;
 
   &:hover {
     background-color: #fff;

@@ -10,6 +10,15 @@ const GlobalStyles = createGlobalStyle`
     --color-grey: hsl(0, 0%, 40%);
   }
 
+  html, body {
+    height: 100%;
+    box-sizing: border-box;
+  }
+
+  #root {
+    height: 100%;
+  }
+
   h1 {
     font-size: 32px;
     font-weight: bold;
