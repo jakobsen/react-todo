@@ -16,6 +16,14 @@ interface IncompleteTask extends ITask {
 const TasksWrapper = () => {
   const [newTaskText, setNewTaskText] = useState("");
   const [tasks, setTasks] = useState<ITask[]>([]);
+  const [completeTasks, setCompleteTasks] = useState<ITask[]>([]);
+  const [incompleteTasks, setincompleteTasks] = useState<ITask[]>([]);
+
+  useEffect(() => {
+    const [tempCompleteTasks, tempIncompleteTasks] = sortTasks(tasks);
+    setCompleteTasks(tempCompleteTasks);
+    setincompleteTasks(tempIncompleteTasks);
+  }, [tasks]);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -30,14 +38,24 @@ const TasksWrapper = () => {
     }
   };
 
+  function sortTasks(tasks: ITask[]) {
+    const completedTasks: ITask[] = [];
+    const incompleteTasks: ITask[] = [];
+    for (const task of tasks) {
+      task.complete ? completedTasks.push(task) : incompleteTasks.push(task);
+    }
+    return [completedTasks, incompleteTasks];
+  }
+
   function toggleTask(id: number) {
     const tempTasks = [...tasks];
     tempTasks.forEach((task) => {
       if (task.id == id) {
         task.complete = !task.complete;
+        setTasks(tempTasks);
+        return;
       }
     });
-    setTasks(tempTasks);
   }
 
   return (
@@ -58,22 +76,36 @@ const TasksWrapper = () => {
         <ConstantHeight>
           <h2>Shit you still have to do</h2>
           <Spacer size={8} />
-          <TaskList
-            tasks={tasks.filter((task) => !task.complete)}
-            toggle={toggleTask}
-          />
+          {incompleteTasks.length ? (
+            <TaskList tasks={incompleteTasks} toggle={toggleTask} />
+          ) : (
+            <HappyMessageParagraph>
+              Nothing at all!{" "}
+              <span role="img" aria-label="beer">
+                🍺
+              </span>
+            </HappyMessageParagraph>
+          )}
         </ConstantHeight>
         <Spacer axis="vertical" size={24} />
-        <h2>Shit you're done with</h2>
-        <Spacer size={8} />
-        <TaskList
-          tasks={tasks.filter((task) => task.complete)}
-          toggle={toggleTask}
-        />
+        {completeTasks.length ? (
+          <>
+            <h2>Shit you're done with</h2>
+            <Spacer size={8} />
+            <TaskList
+              tasks={tasks.filter((task) => task.complete)}
+              toggle={toggleTask}
+            />
+          </>
+        ) : null}
       </Wrapper>
     </>
   );
 };
+
+const HappyMessageParagraph = styled.p`
+  color: var(--color-grey);
+`;
 
 const WideWrapper = styled.section`
   width: 90vw;
