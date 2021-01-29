@@ -16,15 +16,15 @@ const App = () => {
         <TasksWrapper />
       </Content>
       <Footer>
-        You can find the source code for this 💩{" "}
+        If you insist, feel free to look at the{" "}
         <a
           href="https://github.com/jakobsen/react-todo"
           target="_blank"
           rel="noopener noreferrer"
         >
-          here
-        </a>
-        .
+          source code
+        </a>{" "}
+        for this 💩.
       </Footer>
     </SiteWrapper>
   );
