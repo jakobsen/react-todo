@@ -48,6 +48,7 @@ const TasksWrapper = () => {
             placeholder="What shit do you have to do?"
             value={newTaskText}
             onChange={(e) => setNewTaskText(e.target.value)}
+            aria-label="Task input"
           />
           <SubmitButton type="submit" value="Fuck me" />
         </TaskForm>
