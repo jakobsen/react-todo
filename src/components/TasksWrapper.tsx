@@ -48,6 +48,7 @@ const TasksWrapper = () => {
             placeholder="What shit do you have to do?"
             value={newTaskText}
             onChange={(e) => setNewTaskText(e.target.value)}
+            aria-label="Task input"
           />
           <SubmitButton type="submit" value="Fuck me" />
         </TaskForm>
@@ -120,8 +121,8 @@ const TaskInput = styled.input`
 
 const SubmitButton = styled.input`
   border: none;
-  background-color: var(--color-primary);
-  color: #fff;
+  background-color: var(--color-primary-light);
+  color: var(--color-primary-dark);
   font-size: inherit;
   max-width: 140px;
   margin: 0 auto;
@@ -129,8 +130,14 @@ const SubmitButton = styled.input`
 
   &:hover {
     background-color: #fff;
-    color: var(--color-primary);
-    border: 2px solid var(--color-primary);
+    color: var(--color-primary-dark);
+    border: 2px solid var(--color-primary-dark);
+  }
+
+  &:active {
+    color: var(--color-primary-dark);
+    border: 2px solid var(--color-primary-dark);
+    box-shadow: inset 0 0 0 2px;
   }
 `;
 

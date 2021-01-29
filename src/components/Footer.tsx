@@ -8,13 +8,14 @@ const Footer = styled.footer`
 
   & a {
     text-decoration: none;
-    color: var(--color-primary);
-    font-weight: bold;
+    border-bottom: solid 3px var(--color-primary-light);
+    box-shadow: inset 0 -0.3em 0 var(--color-primary-light);
+    color: var(--color-primary-dark);
+    font-weight: 600;
     padding: 2px 0;
 
     &:hover {
-      color: #fff;
-      background: var(--color-primary);
+      background: var(--color-primary-light);
     }
   }
 `;
