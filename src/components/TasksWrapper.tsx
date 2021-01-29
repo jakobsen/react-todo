@@ -35,9 +35,10 @@ const TasksWrapper = () => {
     tempTasks.forEach((task) => {
       if (task.id == id) {
         task.complete = !task.complete;
+        setTasks(tempTasks);
+        return;
       }
     });
-    setTasks(tempTasks);
   }
 
   return (
